@@ -37,11 +37,11 @@ library(urca)
 library(caret)
 
 #Leemos los datos de cada año
-datos2018=read_excel("D:/Archivos/2022PUCV/2023PUCV/DATASCIENCE/dataset_boston_incidents/Datos_2018.xlsx")
-datos2019=read_excel("D:/Archivos/2022PUCV/2023PUCV/DATASCIENCE/dataset_boston_incidents/Datos_2019.xlsx")
-datos2020=read_excel("D:/Archivos/2022PUCV/2023PUCV/DATASCIENCE/dataset_boston_incidents/Datos_2020.xlsx")
-datos2021=read_excel("D:/Archivos/2022PUCV/2023PUCV/DATASCIENCE/dataset_boston_incidents/Datos_2021.xlsx")
-datos2022=read_excel("D:/Archivos/2022PUCV/2023PUCV/DATASCIENCE/dataset_boston_incidents/Datos_2022.xlsx")
+datos2018=read_excel("Datos_2018.xlsx")
+datos2019=read_excel("Datos_2019.xlsx")
+datos2020=read_excel("Datos_2020.xlsx")
+datos2021=read_excel("Datos_2021.xlsx")
+datos2022=read_excel("Datos_2022.xlsx")
 
 #Quitamos columnas que no son de nuestro interés
 datos2018x=datos2018[,c(-3,-4,-6,-9,-10,-11,-12,-13,-17)]
@@ -93,11 +93,6 @@ DatosTotal$Disparo<- str_replace(DatosTotal$Disparo,"NA","No")
 
 #Corroboramos cambio en cantidad de datos vacíos por atributo
 apply (DatosTotal, MARGIN = 2, function(x) sum (is.na(x)))
-
-
-#Creamos archivo excel de la base datos
-setwd("C:/Users/polic/Desktop/2023 - 1S/DATA SCIENCE")
-write.xlsx(DatosTotal,"Datos Total2.xlsx")
 
 
 #Agregamos a la base de datos la columna día de la semana
@@ -218,7 +213,7 @@ datos_ordenados
 
 
 #leer datos shp de mapa
-DistritosGeo <- st_read("D:/Archivos/2022PUCV/2023PUCV/DATASCIENCE/Police_Districts.shp")
+DistritosGeo <- st_read("Police_Districts.shp")
 
 #Frecuencia de aparición de distritos en la base de datos
 Frecuencia.distritos <- DatosTotal %>%
@@ -263,7 +258,7 @@ ggplot() +
 #Modelo series de tiempo
 
 
-datosDistrito0=read_excel("D:/Archivos/2022PUCV/2023PUCV/DATASCIENCE/Delitos_x_mes_x_distrito.xlsx")
+datosDistrito0=read_excel("Delitos_x_mes_x_distrito.xlsx")
 
 datosDistrito <- select(datosDistrito0, Fecha, Downtown, Charlestown, Dorchester, Roxbury) %>% dplyr::mutate(Fecha=tsibble::yearmonth(Fecha))
 
@@ -342,7 +337,7 @@ pronostico3 %>%
 
 #COMPROBACIÓN PRECISIÓN DEL MODELO
 
-DatosDistrito2 = read_excel("D:/Archivos/2022PUCV/2023PUCV/DATASCIENCE/Delitos_x_mes_x_distrito.xlsx")
+DatosDistrito2 = read_excel("Delitos_x_mes_x_distrito.xlsx")
 
 # Definir el rango de tiempo
 fecha_inicio2 <- as.Date("2018-01-01")
